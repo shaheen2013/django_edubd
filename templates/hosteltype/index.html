@@ -1,0 +1,65 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		
+		<div class="col-md-12">
+			<div class="card card-header bg-info text-white">
+				<h1>Hostel Type List</h1>
+			</div>
+		</div>
+		<div class="col-md-7">
+			
+			<div class="card card-header">
+			<h4>Hostel Type</h4>
+			</div>
+			<div class="card card-body"> 
+				<table class="table table-sm">
+					<tr>
+						<th>Serial</th>
+						<th>Type</th>
+						<th>Description</th>
+						<th>Action</th>
+					</tr>
+					{% for row in hostel_types  %}
+						<tr>
+							<td>{{forloop.counter}}</td>
+							<td>{{row.type}}</td>
+							<td>{{row.description}}</td>
+							<td><a href="{% url 'hostel_type.edit' row.id %}" class="btn btn-info">Edit</a>
+							<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'hostel_type.delete' row.id %}" class="btn btn-danger">Delete</a></td>
+						</tr>
+					{% endfor %}
+
+				</table>
+			</div>
+		</div>
+		<div class="col-md-5">
+				<div class="card card-header">
+					<h4>Add New Hostel Type</h4>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="exampleInputEmail1">Type</label>
+							{{form.type}}
+							<span class="text-danger">{{form.errors.type}}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Description</label>
+							{{form.description}}
+							<span class="text-danger">{{form.errors.description}}</span>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+		
+
+	</div>
+</div
+  
+{% endblock  %}

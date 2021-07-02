@@ -1,0 +1,48 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Room</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="exampleInputEmail1">Number</label>
+							{{form.number}}
+							<span class="text-danger">{{form.errors.number}}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Type</label>
+							{{form.type}}
+							<span class="text-danger">{{form.errors.type}}</span>
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">Number of Bed</label>
+							{{form.number_of_bed}}
+							<span class="text-danger">{{form.errors.number_of_bed}}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Cost Per Bed</label>
+							{{form.bed_cost}}
+							<span class="text-danger">{{form.errors.bed_cost}}</span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Description</label>
+							{{form.description}}
+							<span class="text-danger">{{form.errors.description}}</span>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

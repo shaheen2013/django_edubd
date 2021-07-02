@@ -1,0 +1,49 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Hostel
+			<a class="btn btn-primary  float-right" href="hostel/create"> + Create Hostel</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Type</th>
+					<th>Action</th>
+				</tr>
+				{% for row in hostels  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.name}}</td>
+						<td>{{row.address}}</td>
+						<td>{{row.type}}</td>
+						<td>
+						
+						<a href="hostel/staff/{{row.id}}" class="btn btn-success" title="Staff"><i class="fa fa-address-book-o"></i></a>
+						<a href="hostel/add_student/{{row.id}}" class="btn btn-primary" title="Student"><i class="fa fa-users"></i></a>
+						<a href="hostel/room/{{row.id}}" class="btn btn-warning" title="Room"><i class="fa fa-bed"></i></a>
+						<a href="hostel/view/{{row.id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+						<a href="hostel/edit/{{row.id}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="hostel/delete/{{row.id}}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

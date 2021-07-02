@@ -1,0 +1,43 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Staff <a class="btn btn-primary  float-right" href="{% url 'hostel.add_staff' hostel %}"> + Create Staff</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Designation</th>
+					<th>Action</th>
+				</tr>
+				{% for row in staff  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.user.first_name}}</td>
+						<td>{{row.user.email}}</td>
+						<td>{{row.designation}}</td>
+						<td>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'hostel.staff_delete' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+						</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

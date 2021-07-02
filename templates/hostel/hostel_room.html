@@ -1,0 +1,48 @@
+{% extends "author/base.html" %}
+{% block content %}
+{% load helper %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Room
+			<a class="btn btn-primary  float-right" href="{% url 'hostel.add_room' hostel_id %}"> + Create Room</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Number</th>
+					<th>Type</th>
+					<th>Cost Per Bed</th>
+					<th>Number of Bed</th>
+					<th>Available of Bed</th>
+					<th>Action</th>
+				</tr>
+				{% for row in rooms  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.number}}</td>
+						<td>{{row.type}}</td>
+						<td>{{row.bed_cost}}</td>
+						<td>{{row.number_of_bed}}</td>
+						<td>{% available_seat row.id hostel_id %}</td>
+						<td>
+						<a href="{% url 'hostel.student' hostel_id row.id %}" class="btn btn-primary" title="Student"><i class="fa fa-user"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'hostel.room_delete' hostel_id row.id %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}
