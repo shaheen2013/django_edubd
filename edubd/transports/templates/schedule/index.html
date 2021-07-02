@@ -1,0 +1,55 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Schedule
+			<a class="btn btn-primary  float-right" href="{% url 'transport:add_schedule' %}"> + Create Schedule</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Route</th>
+					<th>Vehicle</th>
+					<th>Vehicle Number</th>
+					<th>Driver</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				{% for row in schedules  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.route}}</td>
+						<td>{{row.vehicle}}</td>
+						<td>{{row.vehicle.number}}</td>
+						<td>{{row.driver}}</td>
+						<td>{{row.start_time}}</td>
+						<td>{{row.end_time}}</td>
+						<td>
+						<a href="{% url 'transport:schedule_members' row.id %}" class="btn btn-warning" title="member"><i class="fa fa-users"></i></a>
+						<a href="{% url 'transport:schedule_stopages' row.id %}" class="btn btn-success" title="stopage"><i class="fa fa-ban"></i></a>
+						<a href="{% url 'transport:edit_schedule' row.id %}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'transport:delete_schedule' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

@@ -1,0 +1,79 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>News
+			<a class="btn btn-primary  float-right" href="{% url 'announcement:add_news' %}"> + Add News</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Title</th>
+					<th>News For</th>
+					<th>Active Date</th>
+					<th>Date</th>
+					<th>Attachment</th>
+					<th>status</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for row in news  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.title}}</td>
+						<td>{{row.news_for}}</td>
+						<td>{{row.active_date|date:'d-m-Y'}}</td>
+						<td>{{row.date_created|date:'d-m-Y'}}</td>
+						
+						<td> 
+							{% if row.attachment %}
+								<a class="badge badge-info" href="/static/images/{{row.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}
+						</td>
+						<td>
+							{% if row.active_date %}
+								{% if row.active_date|date:'Y-m-d' <= date and row.status == 1  %}
+									<span class="badge badge-success">Active</span>
+								{% elif row.active_date|date:'Y-m-d' > date and row.status == 1 %}
+									<span class="badge badge-warning">Upcomming</span>
+								{% elif row.status == 0 %}
+									<span class="badge badge-danger">Inactive</span>
+								{% endif %}
+							{% else %}
+								{% if row.status == 0 %}
+									<span class="badge badge-danger">Inactive</span>
+								{% elif row.status == 1 %}
+									<span class="badge badge-success">Active</span>
+								{% endif %}
+							{% endif %}
+						
+						</td>
+						<td>
+						
+						<a href="{% url 'announcement:news' row.id %}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+						<a href="{% url 'announcement:edit_news' row.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'announcement:delete_news' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			    </tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+  
+{% endblock  %}

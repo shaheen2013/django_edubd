@@ -1,0 +1,64 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Holiday</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Title</label>
+									{{form.title}}
+									<span class="text-danger">{{form.errors.title}}</span>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Start Date</label>
+									{{form.start_date}}
+									<span class="text-danger">{{form.errors.start_date}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">End Date</label>
+									{{form.end_date}}
+									<span class="text-danger">{{form.errors.end_date}}</span>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Attachment</label>
+									{{form.attachment}}
+									<span class="text-danger">{{form.errors.attachment}}</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Description</label>
+									{{form.description}}
+									<span class="text-danger">{{form.errors.description}}</span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

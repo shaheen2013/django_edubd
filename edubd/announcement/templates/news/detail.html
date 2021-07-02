@@ -1,0 +1,65 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>News:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>News Details</h1>
+		</div>
+		<div class="card card-body">
+			<div class="row">
+				<div class="col-md-12"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Title : </span><span class="float-right">{{news.title}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">News For : </span><span class="float-right">{{news.notice_for}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Active Date : </span><span class="float-right">{{news.active_date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Date : </span><span class="float-right">{{news.date_created|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Atachment : </span><span class="float-right">{% if news.attachment %}
+								<a class="badge badge-info" href="/static/images/{{news.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}</span></li>
+						
+						<li class="list-group-item "><span class="font-weight-bold">Status : </span><span class="float-right">{% if news.active_date %}
+								{% if news.active_date|date:'Y-m-d' <= date and news.status == 1  %}
+									<span class="badge badge-success">Active</span>
+								{% elif news.active_date|date:'Y-m-d' > date and news.status == 1 %}
+									<span class="badge badge-warning">Upcomming</span>
+								{% elif news.status == 0 %}
+									<span class="badge badge-danger">Inactive</span>
+								{% endif %}
+							{% else %}
+								{% if news.status == 0 %}
+									<span class="badge badge-danger">Inactive</span>
+								{% elif news.status == 1 %}
+									<span class="badge badge-success">Active</span>
+								{% endif %}
+							{% endif %}</span></li>
+						
+					</ul>
+				</div>
+				
+				
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Description</li>
+						<li class="list-group-item ">{{news.description}}</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

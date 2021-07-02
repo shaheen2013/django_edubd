@@ -1,0 +1,65 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Phone call log:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Phone call log</h1>
+		</div>
+		<div class="card card-body">
+			<div class="row">
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Name: </span><span class="float-right">{{phonecalllog.name}}</span></li>
+						
+						<li class="list-group-item "><span class="font-weight-bold">Phone No : </span><span class="float-right">{{phonecalllog.phone}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Call duration: </span><span class="float-right">{{phonecalllog.call_duration}}</span></li>
+						
+					</ul>
+				</div>
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Date: </span><span class="float-right">{{phonecalllog.date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Follow up: </span><span class="float-right">{{phonecalllog.followup|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Call Type: </span><span class="float-right">
+							{% if phonecalllog.call_type == 1 %}
+								Incoming
+							{% elif  phonecalllog.call_type == 2 %}
+								Outgoing
+							{% endif %} </span></li>
+						
+						
+						
+						
+					</ul>
+				</div>
+				
+				
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Description</li>
+						<li class="list-group-item ">{{phonecalllog.description}}</li>
+					</ul>
+				</div>
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Note</li>
+						<li class="list-group-item ">{{phonecalllog.note}}</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

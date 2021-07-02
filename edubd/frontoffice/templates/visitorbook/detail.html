@@ -1,0 +1,71 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Visitor Book:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Visitor Book Details</h1>
+		</div>
+		<div class="card card-body">
+			<div class="row">
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">{{visitorbook.name}} </span><span class="float-right"><img width="100px" height="100px" class="profile-pic" src="{{visitorbook.image.url}}" ></span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Purpuse : </span><span class="float-right">{{visitorbook.purpose}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Phone No : </span><span class="float-right">{{visitorbook.phone}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Id Card : </span><span class="float-right">{{visitorbook.id_card}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Atachment : </span><span class="float-right">{% if visitorbook.attachment %}
+								<a class="badge badge-info" href="/static/images/{{visitorbook.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}</span>
+						</li>
+						
+						
+						
+					</ul>
+				</div>
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Meet User Type : </span><span class="float-right">{{visitorbook.meet_user_type}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Meet user : </span><span class="float-right">{{visitorbook.dmeet_user}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Date : </span><span class="float-right">{{visitorbook.date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">In Time : </span><span class="float-right">{{visitorbook.in_time}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Out Time : </span><span class="float-right">{{visitorbook.out_time}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Phone No : </span><span class="float-right">{{visitorbook.phone}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Atachment : </span><span class="float-right">{% if visitorbook.attachment %}
+								<a class="badge badge-info" href="/static/images/{{visitorbook.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}</span>
+						</li>
+						
+						
+						
+					</ul>
+				</div>
+				
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Note</li>
+						<li class="list-group-item ">{{visitorbook.note}}</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

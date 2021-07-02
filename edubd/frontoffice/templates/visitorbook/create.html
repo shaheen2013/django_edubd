@@ -1,0 +1,177 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Visitor Book</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-4">
+								<video  id="video" autoplay></video><br>
+								<button class="btn btn-primary btn-block" type="button" onclick="snap()"> Capture</button>
+							</div>
+							<div class="col-md-4">
+								<canvas id="canvas" height="250px" width="250px" ></canvas>
+							</div>
+							<div class="col-md-4" >
+							<div id="text" style="display:none">
+							<div  style="background: #FF5733; color: #fff; padding: 25px 8px 0; height: 250px; ">
+								<h4 > Click right button over the picture and click on the save image as</h4>
+								</div>
+								</div>
+							</div>
+							
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Name</label>
+									{{form.name}}
+									<span class="text-danger">{{form.errors.name}}</span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Phone</label>
+									{{form.phone}}
+									<span class="text-danger">{{form.errors.phone}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Purpose</label>
+									{{form.purpose}}
+									<span class="text-danger">{{form.errors.purpose}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Meet User Type</label>
+									{{form.meet_user_type}}
+									<span class="text-danger">{{form.errors.meet_user_type}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Meet User</label>
+									
+									{% if check == 1 %}
+											{{form.meet_user}}
+										{% else %}
+											<select name="meet_user" class="form-control select2 "  required="" id="id_meet_user" >
+										
+
+											</select>
+										{% endif %}
+									<span class="text-danger">{{form.errors.meet_user}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Date</label>
+									{{form.date}}
+									<span class="text-danger">{{form.errors.date}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">In Time</label>
+									{{form.in_time}}
+									<span class="text-danger">{{form.errors.in_time}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Out Time</label>
+									{{form.out_time}}
+									<span class="text-danger">{{form.errors.out_time}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">ID Card</label>
+									{{form.id_card}}
+									<span class="text-danger">{{form.errors.id_card}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Attachment</label>
+									{{form.attachment}}
+									<span class="text-danger">{{form.errors.attachment}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Image</label>
+									{{form.image}}
+									<span class="text-danger">{{form.errors.image}}</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Note</label>
+									{{form.note}}
+									<span class="text-danger">{{form.errors.note}}</span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+<script>
+	$(document).ready(function() {
+		$("#id_meet_user_type").change(function(){
+			var id = $(this).val();
+			console.log(id);
+			$.ajax({
+				type:'GET',
+				url:'{% url 'frontoffice:get_user' %}',
+				data:{id:id},
+				success:function(data){
+					console.log(data);
+					$('#id_meet_user').html(data)
+				},
+				error:function(){
+					console.log('error');
+				}
+			});
+		});
+	});
+</script>
+<script>
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        navigator.mediaDevices.getUserMedia({
+            video:{
+				width:260,
+				height:250
+			}
+        })
+        .then(stream => {
+            document.getElementById('video').srcObject = stream;
+        })
+
+        function snap(){
+            canvas.width = video.clientWidth;
+            canvas.height = video.clientHeight;
+            context.drawImage(video, 0 ,0);
+			document.getElementById('text').style='display:block'
+        }
+    </script>
+{% endblock content %}

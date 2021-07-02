@@ -1,0 +1,60 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Stopage</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Name</label>
+									{{form.name}}
+									<span class="text-danger">{{form.errors.name}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Lat</label>
+									{{form.lat}}
+									<span class="text-danger">{{form.errors.lat}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Long</label>
+									{{form.long}}
+									<span class="text-danger">{{form.errors.long}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Fare</label>
+									{{form.fare}}
+									<span class="text-danger">{{form.errors.fare}}</span>
+								</div>
+							</div>
+						
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Address</label>
+									{{form.address}}
+									<span class="text-danger">{{form.errors.address}}</span>
+								</div>
+							</div>
+						</div>	
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

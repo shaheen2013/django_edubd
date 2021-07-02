@@ -1,0 +1,55 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Stopage
+			<a class="btn btn-primary  float-right" href="{% url 'transport:add_schedule_stopage' schedule %} "> + Create Stopage</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Lat</th>
+					<th>Long</th>
+					<th>Fare</th>
+					<th>Address</th>
+					<th>Reach Time</th>
+					<th>Leave Time</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				{% for row in stopages  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						
+						<td>{{row.stopage.name}}</td>
+						<td>{{row.stopage.lat}}</td>
+						<td>{{row.stopage.long}}</td>
+						<td>{{row.stopage.fare}}</td>
+						<td>{{row.stopage.address}}</td>
+						<td>{{row.reach_time}}</td>
+						<td>{{row.leave_time}}</td>
+						<td>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'transport:delete_schedule_stopage' row.id %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

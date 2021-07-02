@@ -1,0 +1,41 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Publisher:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Publisher
+			<a class="btn btn-primary  float-right" href="{% url 'library:add_publisher' %} "> + Create Publisher</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Action</th>
+				</tr>
+				{% for row in publishers  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.name}}</td>
+						<td>{{row.description}}</td>
+						<td><a href="{% url 'library:edit_publisher' row.id %}" class="btn btn-info">Edit</a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'library:delete_publisher' row.id %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

@@ -1,0 +1,54 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Complain
+			<a class="btn btn-primary  float-right" href="{% url 'frontoffice:add_complain' %}"> + Add Complain</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+					<tr>
+						<th>Serial</th>
+						<th>Type</th>
+						<th>Complain By</th>
+						<th>Phone</th>
+						<th>Date</th>
+						<th>Assigned</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for row in complain  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.complain_type}}</td>
+						<td>{{row.complain_by}}</td>
+						<td>{{row.phone}}</td>
+						<td>{{row.date|date:'d-m-Y'}}</td>
+						<td>{{row.assigned}}</td>
+						
+						<td>
+						
+						<a href="{% url 'frontoffice:complain' row.id %}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+						<a href="{% url 'frontoffice:edit_complain' row.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'frontoffice:delete_complain' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

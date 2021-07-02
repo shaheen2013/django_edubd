@@ -1,0 +1,48 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Route
+			<a class="btn btn-primary  float-right" href="{% url 'transport:add_route' %}"> + Create Route</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Start Point</th>
+					<th>End Point</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				{% for row in routes  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						
+						<td>{{row.name}}</td>
+						<td>{{row.start_point}}</td>
+						<td>{{row.end_point}}</td>
+						<td>
+						<a href="{% url 'transport:edit_route' row.id %}" class="btn btn-info">Edit</a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'transport:delete_route' row.id %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

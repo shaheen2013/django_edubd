@@ -1,0 +1,45 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Route</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Name</label>
+									{{form.name}}
+									<span class="text-danger">{{form.errors.name}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Start Point</label>
+									{{form.start_point}}
+									<span class="text-danger">{{form.errors.start_point}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">End Point</label>
+									{{form.end_point}}
+									<span class="text-danger">{{form.errors.end_point}}</span>
+								</div>
+							</div>
+						</div>	
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

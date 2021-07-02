@@ -1,0 +1,126 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Phone Call log</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row">
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Name</label>
+									{{form.name}}
+									<span class="text-danger">{{form.errors.name}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Phone</label>
+									{{form.phone}}
+									<span class="text-danger">{{form.errors.phone}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Call Duration</label>
+									{{form.call_duration}}
+									<span class="text-danger">{{form.errors.call_duration}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Date</label>
+									{{form.date}}
+									<span class="text-danger">{{form.errors.date}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Follow up</label>
+									{{form.followup}}
+									<span class="text-danger">{{form.errors.followup}}</span>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Call Type</label>
+									{{form.call_type}}
+									<span class="text-danger">{{form.errors.call_type}}</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Description</label>
+									{{form.description}}
+									<span class="text-danger">{{form.errors.description}}</span>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Note</label>
+									{{form.note}}
+									<span class="text-danger">{{form.errors.note}}</span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+<script>
+	$(document).ready(function() {
+		$("#id_meet_user_type").change(function(){
+			var id = $(this).val();
+			console.log(id);
+			$.ajax({
+				type:'GET',
+				url:'{% url 'frontoffice:get_user' %}',
+				data:{id:id},
+				success:function(data){
+					console.log(data);
+					$('#id_meet_user').html(data)
+				},
+				error:function(){
+					console.log('error');
+				}
+			});
+		});
+	});
+</script>
+<script>
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        navigator.mediaDevices.getUserMedia({
+            video:{
+				width:260,
+				height:250
+			}
+        })
+        .then(stream => {
+            document.getElementById('video').srcObject = stream;
+        })
+
+        function snap(){
+            canvas.width = video.clientWidth;
+            canvas.height = video.clientHeight;
+            context.drawImage(video, 0 ,0);
+			document.getElementById('text').style='display:block'
+        }
+    </script>
+{% endblock content %}

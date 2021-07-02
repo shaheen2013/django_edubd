@@ -1,0 +1,86 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Schedule</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Route</label>
+									{{form.route}}
+									<span class="text-danger">{{form.errors.route}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Vehicle</label>
+									{{form.vehicle}}
+									<span class="text-danger">{{form.errors.vehicle}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Driver</label>
+										{% if check == 1 %}
+											{{form.driver}}
+										{% else %}
+											<select class="form-control select2" name="driver" id="driver">
+											</select>
+										{% endif %}
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Start Time</label>
+									{{form.start_time}}
+									<span class="text-danger">{{form.errors.start_time}}</span>
+								</div>
+							</div>
+						
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">End Time</label>
+									{{form.end_time}}
+									<span class="text-danger">{{form.errors.end_time}}</span>
+								</div>
+								
+							</div>
+							
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+						
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				$("#id_vehicle").change(function(){
+					var id = $(this).val();
+					$.ajax({
+						type:'GET',
+						url:'{% url 'transport:get_driver' %}',
+						data:{vehicle:id},
+						success:function(data){
+							$('#driver').html(data)
+						},
+						error:function(){
+							console.log('error');
+						}
+					});
+				});
+			});
+		</script>
+{% endblock content %}

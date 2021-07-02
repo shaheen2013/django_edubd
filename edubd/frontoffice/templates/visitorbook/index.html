@@ -1,0 +1,64 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Visitor Book
+			<a class="btn btn-primary  float-right" href="{% url 'frontoffice:add_visitorbook' %}"> + Add Visitor Book</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Picture</th>
+					<th>Name</th>
+					<th>Purpose</th>
+					<th>Phone</th>
+					<th>ID Card</th>
+					<th>Date</th>
+					<th>Meet User</th>
+					<th>Action</th>
+				</tr>
+				{% for row in visitorbook  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td><img width="50px" height="50px" class="profile-pic" src="{{row.image.url}}" ></td>
+						<td>{{row.name}}</td>
+						<td>{{row.purpose}}</td>
+						<td>{{row.phone}}</td>
+						<td>{{row.id_card}}</td>
+						<td>
+							<span class="font-weight-bold">Date: </span> {{row.date|date:'d-m-Y'}}, <br>
+							<span class="font-weight-bold">In time: </span> {{row.in_time}}, <br>
+							<span class="font-weight-bold">Out time: </span> {{row.out_time}}, <br>
+						</td>
+						<td>
+							<span class="font-weight-bold">User Type: </span> {{row.meet_user_type}}, <br>
+							<span class="font-weight-bold">Name: </span> {{row.meet_user}}, <br>
+							<span class="font-weight-bold">Phone: </span> {{row.phone}}, <br>
+						
+						</td>
+						
+						<td>
+						
+						<a href="{% url 'frontoffice:visitorbook' row.id %}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+						<a href="{% url 'frontoffice:edit_visitorbook' row.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'frontoffice:delete_visitorbook' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

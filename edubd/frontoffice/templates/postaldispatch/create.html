@@ -1,0 +1,121 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Postal Dispatch</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row">
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">To</label>
+									{{form.receiver}}
+									<span class="text-danger">{{form.errors.receiver}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">From</label>
+									{{form.sender}}
+									<span class="text-danger">{{form.errors.sender}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Referance</label>
+									{{form.referance}}
+									<span class="text-danger">{{form.errors.referance}}</span>
+								</div>
+							</div>
+							
+						</div>	
+						<div class="row">
+							<div class="col-md-4">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Dispatch Date</label>
+										{{form.dispatch_date}}
+										<span class="text-danger">{{form.errors.dispatch_date}}</span>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Attachment</label>
+										{{form.attachment}}
+										<span class="text-danger">{{form.errors.attachment}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Address</label>
+									{{form.address}}
+									<span class="text-danger">{{form.errors.address}}</span>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Note</label>
+									{{form.note}}
+									<span class="text-danger">{{form.errors.note}}</span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+<script>
+	$(document).ready(function() {
+		$("#id_meet_user_type").change(function(){
+			var id = $(this).val();
+			console.log(id);
+			$.ajax({
+				type:'GET',
+				url:'{% url 'frontoffice:get_user' %}',
+				data:{id:id},
+				success:function(data){
+					console.log(data);
+					$('#id_meet_user').html(data)
+				},
+				error:function(){
+					console.log('error');
+				}
+			});
+		});
+	});
+</script>
+<script>
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        navigator.mediaDevices.getUserMedia({
+            video:{
+				width:260,
+				height:250
+			}
+        })
+        .then(stream => {
+            document.getElementById('video').srcObject = stream;
+        })
+
+        function snap(){
+            canvas.width = video.clientWidth;
+            canvas.height = video.clientHeight;
+            context.drawImage(video, 0 ,0);
+			document.getElementById('text').style='display:block'
+        }
+    </script>
+{% endblock content %}

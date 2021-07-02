@@ -1,0 +1,37 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Member</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row " >
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Member</label>
+									{{form.user}}
+									<span class="text-danger">{{form.errors.user}}</span>
+								</div>
+							</div>
+							
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#id_user').find("option:first-child").removeAttr('selected');
+		});
+	</script>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Phone call log
+			<a class="btn btn-primary  float-right" href="{% url 'frontoffice:add_phonecalllog' %}"> + Add Phone call log</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Call Duration</th>
+					<th>Date</th>
+					<th>Follow up</th>
+					<th>Call Type</th>
+					<th>Action</th>
+				</tr>
+				{% for row in phonecalllog  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.name}}</td>
+						<td>{{row.phone}}</td>
+						<td>{{row.call_duration}}</td>
+						<td>{{row.date|date:'d-m-Y'}}</td>
+						<td>{{row.followup|date:'d-m-Y'}}</td>
+						<td>
+							{% if row.call_type == 1 %}
+								Incoming
+							{% elif  row.call_type == 2 %}
+								Outgoing
+							{% endif %}
+						</td>
+						
+						<td>
+						
+						<a href="{% url 'frontoffice:phonecalllog' row.id %}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+						<a href="{% url 'frontoffice:edit_phonecalllog' row.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'frontoffice:delete_phonecalllog' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

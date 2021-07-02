@@ -1,0 +1,54 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Driver
+			<a class="btn btn-primary  float-right" href="{% url 'transport:add_vehicle_driver' vehicle %}"> + Create Driver</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Driver</th>
+					<th>Address</th>
+					<th>Licence Number</th>
+					<th>Licence Validity</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				{% for row in drivers  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>
+							<span class="font-weight-bold">Name: </span> {{row.name}}, <br>
+							<span class="font-weight-bold"> Phone Number: </span> {{row.phone}}, <br>
+							<span class="font-weight-bold"> Age: </span>{{row.age}}, <br>
+							<span class="font-weight-bold"> Gender: </span>{{row.gender}}, <br>
+							
+						</td>
+						<td>{{row.address}}</td>
+						<td>{{row.driving_licence}}</td>
+						<td>{{row.driving_licence_validity|date:'d-m-Y'}}</td>
+						<td>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'transport:delete_vehicle_driver_vehicle_driver' vehicle row.id  %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

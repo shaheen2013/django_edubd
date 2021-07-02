@@ -1,0 +1,46 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Fare</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Start Stopage</label>
+									{{form.start_stopage}}
+									<span class="text-danger">{{form.errors.start_stopage}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">End Stopage</label>
+									{{form.end_stopage}}
+									<span class="text-danger">{{form.errors.end_stopage}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Fare</label>
+									{{form.fare}}
+									<span class="text-danger">{{form.errors.fare}}</span>
+								</div>
+							</div>
+						</div>	
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

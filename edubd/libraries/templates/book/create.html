@@ -1,0 +1,114 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Book</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Title</label>
+									{{form.title}}
+									<span class="text-danger">{{form.errors.title}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Subject</label>
+									{{form.subject}}
+									<span class="text-danger">{{form.errors.subject}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Image</label>
+									{{form.image}}
+									<span class="text-danger">{{form.errors.image}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Book Number</label>
+									{{form.book_number}}
+									<span class="text-danger">{{form.errors.book_number}}</span>
+								</div>
+							</div>
+						
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">ISBN Number</label>
+									{{form.isbn_number}}
+									<span class="text-danger">{{form.errors.isbn_number}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Price</label>
+									{{form.price}}
+									<span class="text-danger">{{form.errors.price}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Quantity</label>
+									{{form.qty}}
+									<span class="text-danger">{{form.errors.qty}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Publisher</label>
+									{{form.publisher}}
+									<span class="text-danger">{{form.errors.publisher}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Author</label>
+									{{form.author}}
+									<span class="text-danger">{{form.errors.author}}</span>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Book Language</label>
+									{{form.book_language}}
+									<span class="text-danger">{{form.errors.book_language}}</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Rack</label>
+									{{form.rack}}
+									<span class="text-danger">{{form.errors.rack}}</span>
+								</div>
+							</div>
+							
+							
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Description</label>
+									{{form.description}}
+									<span class="text-danger">{{form.errors.description}}</span>
+								</div>
+							</div>
+							
+						</div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

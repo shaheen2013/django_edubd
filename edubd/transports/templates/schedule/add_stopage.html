@@ -1,0 +1,72 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Stopage</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row stopage" >
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Stopage</label>
+									{{form.stopage}}
+									<span class="text-danger">{{form.errors.stopage}}</span>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Reach Time</label>
+									{{form.reach_time}}
+									<span class="text-danger">{{form.errors.reach_time}}</span>
+								</div>
+							</div>
+						
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Leave Time</label>
+									{{form.leave_time}}
+									<span class="text-danger">{{form.errors.leave_time}}</span>
+								</div>
+								
+							</div>
+							
+						</div>
+							<div class="more_div"></div>
+							<button id="more" type="button" class="btn btn-success float-right ">+</button>
+						<div class="row ">
+							<div class="col-md-12"></div>
+								<button type="submit" class="btn btn-success">Submit</button>
+							</div>
+						</form>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				var i = 1;
+				console.log('aa');
+				$("#more").click(function(){
+					i++;
+					console.log('aa');
+					$(".more_div").append('<div class="row stopage"><div class="col-md-4"><div class="form-group"><label for="exampleInputEmail1">Stopage</label><select class="form-control select2" name="stopage" required><option value="">Select </option>{% for row in stopage %}<option value="{{row.id}}">{{row.name}} </option>{% endfor %}</select></div></div><div class="col-md-4"><div class="form-group"><label for="exampleInputEmail1">Reach Time</label>{{form.reach_time}}<span class="text-danger">{{form.errors.reach_time}}</span></div></div><div class="col-md-3"><div class="form-group"><label for="exampleInputEmail1">Leave Time</label>{{form.leave_time}}<span class="text-danger">{{form.errors.leave_time}}</span></div></div><div class="col-md-1" style="    margin-top: 35px;"><a id="remove_row-'+i+'" class="btn btn-danger btn-sm delete-record float-right"><i class="fa fa-times" title="remove"></i></a></div></div>');
+					$(".more_div").on('click', '.delete-record', function(){
+						$(this).closest(".stopage").remove();
+					   
+					});
+				}); 
+			}); 
+		</script>
+{% endblock content %}

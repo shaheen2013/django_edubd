@@ -1,0 +1,59 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Member
+			<a class="btn btn-primary  float-right" href="{% url 'transport:add_schedule_member' schedule %} "> + Create Member</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>User</th>
+					<th>Schedule</th>
+					<th>Route</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				{% for row in members  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						
+						<td>
+							<span class="font-weight-bold"> Name: </span> {{row.user.first_name}}, <br>
+							<span class="font-weight-bold"> Email: </span> {{row.user.email}}, <br>
+						</td>
+						<td>
+						<span class="font-weight-bold"> Vehicle: </span> {{row.schedule.vehicle.name}}, <br>
+						<span class="font-weight-bold"> Driver: </span> {{row.schedule.driver.name}}, <br>
+						<span class="font-weight-bold"> Start Time: </span> {{row.schedule.start_time}}, <br>
+						<span class="font-weight-bold"> End Time: </span> {{row.schedule.end_time}}, <br>
+						</td>
+						<td>
+							<span class="font-weight-bold"> Route: </span> {{row.schedule.route}}, <br>
+							<span class="font-weight-bold"> Start Point: </span> {{row.schedule.route.start_point}}, <br>
+							<span class="font-weight-bold"> End Point: </span> {{row.schedule.route.end_point}}, <br>
+						</td>
+						<td>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'transport:delete_schedule_member' row.id %}" class="btn btn-danger">Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

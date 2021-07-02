@@ -1,0 +1,64 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% load library %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Book:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Book
+			<a class="btn btn-primary  float-right" href="{% url 'library:add_book' %}"> + Create Book</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Image</th>
+					<th>Title</th>
+					<th>Details</th>
+					<th>Rack</th>
+					<th>Author</th>
+					<th>Quantity</th>
+					<th>Action</th>
+				</tr>
+				{% for row in books  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td><img width="50px" height="50px" class="profile-pic" src="{{row.image.url}}" ></td>
+						<td>{{row.title}}</td>
+						<td>
+							<span class="font-weight-bold"> Book Number: </span> {{row.book_number}}, <br>
+							<span class="font-weight-bold"> ISBN Number: </span>{{row.isbn_number}}, <br>
+							<span class="font-weight-bold"> Subject: </span>{{row.subject}}, <br>
+							<span class="font-weight-bold"> Language: </span>{{row.book_language}}, <br>
+
+						</td>
+						<td>{{row.rack}}</td>
+						<td>{{row.author}}</td>
+						<td>
+							<span class="font-weight-bold"> Total: </span>{{row.qty}}, <br>
+							<span class="font-weight-bold"> Available: </span>{% available_qty row.id %}
+						</td>
+						
+						<td>
+						
+						<a href="{% url 'library:book' row.id %}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+						<a href="{% url 'library:add_book_issue' row.id %}" class="btn btn-warning"><i class="fa fa-plus"></i></a>
+						<a href="{% url 'library:edit_book' row.id %}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'library:delete_book' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

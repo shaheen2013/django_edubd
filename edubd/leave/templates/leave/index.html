@@ -1,0 +1,85 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Leave
+			<a class="btn btn-primary  float-right" href="{% url 'leave:add' %}"> + add Leave</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+				<thead>
+				<tr>
+					<th>Serial</th>
+					<th>Applied By</th>
+					<th>Role</th>
+					<th>leave Type</th>
+					<th>Date</th>
+					<th>Reason</th>
+					<th>Attachment</th>
+					<th>status</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for row in leaves  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.applied_by}}</td>
+						<td>{{row.role}}</td>
+						<td>{{row.leave_type}}</td>
+						<td>
+						<span class="font-weight-bold">Apply Date: </span> {{row.apply_date|date:'d-m-Y'}}, <br>
+						<span class="font-weight-bold">From Date: </span> {{row.from_date|date:'d-m-Y'}}, <br>
+						<span class="font-weight-bold">To Date: </span> {{row.to_date|date:'d-m-Y'}}, <br>
+						<td>{{row.reason}}</td>
+						<td> 
+							{% if row.attachment %}
+								<a class="badge badge-info" href="/static/images/{{row.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}
+						</td>
+						<td>
+						<span class="font-weight-bold">Apply Status: </span> 
+							{% if row.apply_status == 1 %}
+								Advance
+							{% elif row.apply_status == 2 %}
+								Due
+							{% endif %}, <br>
+						<span class="font-weight-bold">Approve Status: </span> 
+							{% if row.approve_status == 0 %}
+								<span class="badge badge-warning">Waiting </span>
+							{% elif row.approve_status == 1 %}
+								<span class="badge badge-success">Approved </span>
+							{% elif row.approve_status == 2 %}
+								<span class="badge badge-danger"> Declined </span>
+							{% endif %}, <br>
+						</td>
+						<td>
+						{% if row.approve_status == 0 %}
+							<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'leave:approve' row.id %}" class="btn btn-success"><i class="fa fa-check"></i></a>
+							<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'leave:decline' row.id %}" class="btn btn-warning"><i class="fa fa-times"></i></a>
+						{% endif %}
+						<a href="{% url 'leave:edit' row.id %}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'leave:delete' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

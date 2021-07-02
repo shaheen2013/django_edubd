@@ -1,0 +1,70 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>{{title}}:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>{{title}}
+			{% comment %} <a class="btn btn-primary  float-right" href="book/create"> + Create Book</a> {% endcomment %}</h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Book</th>
+					<th>User</th>
+					<th>Date</th>
+					<th>Note</th>
+					<th>Action</th>
+				</tr>
+				{% for row in book_issues  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td><img width="50px" height="50px" class="profile-pic" src="{{row.book.image.url}}" ><br>
+						<span class="font-weight-bold">Title: </span> {{row.book.title}}, <br>
+							<span class="font-weight-bold"> Book Number: </span> {{row.book.book_number}}, <br>
+							<span class="font-weight-bold"> ISBN Number: </span>{{row.book.isbn_number}}, <br>
+							<span class="font-weight-bold"> Subject: </span>{{row.book.subject}}, <br>
+							<span class="font-weight-bold"> Author: </span>{{row.book.author}}, <br>
+							<span class="font-weight-bold"> Language: </span>{{row.book.book_language}}, <br>
+
+						</td>
+						<td><img width="50px" height="50px" class="profile-pic" src="{{row.member.image.url}}" ><br>
+						<span class="font-weight-bold">Name: </span> {{row.member.first_name}}, <br>
+							<span class="font-weight-bold"> Email: </span> {{row.member.email}}, <br>
+							
+						<td>
+							<span class="font-weight-bold">Issue Date: </span> {{ row.issue_date|date:'d-m-Y' }}, <br>
+							<span class="font-weight-bold"> Return Date: </span> {{ row.return_date|date:'d-m-Y' }} <br>
+						</td>
+						<td>{{row.note}}</td>
+						
+						<td>
+							{% if row.status == 0 %}
+								<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'library:book_make_return_submit' row.id %}" class="btn btn-primary"><i class="fa fa-check" title="make return"></i></a>
+							{% endif %}
+							<a href="#" class="btn btn-warning"><i class="fa fa-user" title="User Details"></i></a>
+							<a href="{% url 'library:book' row.book.id %}" class="btn btn-success"><i class="fa fa-book" title="Book Details"></i></a>
+							{% if row.status == 0 %}
+								<a href="{% url 'library:edit_book_issue' row.id %}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+
+								<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'library:delete_book_issue' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i>	</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

@@ -1,0 +1,67 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Vehicle</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Name</label>
+									{{form.name}}
+									<span class="text-danger">{{form.errors.name}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Number</label>
+									{{form.number}}
+									<span class="text-danger">{{form.errors.number}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Model</label>
+									{{form.model}}
+									<span class="text-danger">{{form.errors.model}}</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">License Number</label>
+									{{form.license}}
+									<span class="text-danger">{{form.errors.license}}</span>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Year Made</label>
+									{{form.year_made}}
+									<span class="text-danger">{{form.errors.year_made}}</span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Description</label>
+									{{form.description}}
+									<span class="text-danger">{{form.errors.description}}</span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

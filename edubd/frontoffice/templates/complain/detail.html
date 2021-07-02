@@ -1,0 +1,73 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Complain Details:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Complain Details</h1>
+		</div>
+		<div class="card card-body">
+			<div class="row">
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Complain Type: </span><span class="float-right">{{complain.complain_type}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Complain By: </span><span class="float-right">{{complain.complain_by}}</span></li>
+						
+						<li class="list-group-item "><span class="font-weight-bold">Phone No : </span><span class="float-right">{{complain.phone}}</span></li>
+						
+					</ul>
+				</div>
+				<div class="col-md-6"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Date: </span><span class="float-right">{{complain.date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Assigned: </span><span class="float-right">{{complain.assigned}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Atachment : </span><span class="float-right">{% if complain.attachment %}
+								<a class="badge badge-info" href="/static/images/{{complain.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}</span>
+						</li>
+						
+						
+						
+						
+						
+					</ul>
+				</div>
+				
+				
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Description</li>
+						<li class="list-group-item ">{{complain.description}}</li>
+					</ul>
+				</div>
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Action Taken</li>
+						<li class="list-group-item ">{{complain.action_taken}}</li>
+					</ul>
+				</div>
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Note</li>
+						<li class="list-group-item ">{{complain.note}}</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

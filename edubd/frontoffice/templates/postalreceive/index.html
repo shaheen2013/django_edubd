@@ -1,0 +1,61 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Postal Receive
+			<a class="btn btn-primary  float-right" href="{% url 'frontoffice:add_postalreceive' %}"> + Add Postal Receive</a></h1>
+		</div>
+		<div class="card card-body"> 
+			<table class="table table-sm">
+				<tr>
+					<th>Serial</th>
+					<th>Receiver</th>
+					<th>Sender</th>
+					<th>Referance</th>
+					<th>Receive Date</th>
+					<th>Address</th>
+					<th>Note</th>
+					<th>Attachment</th>
+					<th>Action</th>
+				</tr>
+				{% for row in postalreceive  %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{row.receiver}}</td>
+						<td>{{row.sender}}</td>
+						<td>{{row.referance}}</td>
+						<td>{{row.receive_date|date:'d-m-Y'}}</td>
+						<td>{{row.address}}</td>
+						<td>{{row.note}}</td>
+						<td>
+							{% if row.attachment %}
+								<a class="badge badge-info" href="/static/images/{{row.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}
+						</td>
+						
+						<td>
+						
+						<a href="{% url 'frontoffice:edit_postalreceive' row.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+						<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'frontoffice:delete_postalreceive' row.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

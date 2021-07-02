@@ -1,0 +1,58 @@
+{%  extends 'author/base.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card card-body">
+					<h5>Issue Book</h5>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						{% if book %}
+							<input type="hidden" name="book" value="{{book}}">
+						{% else %}
+							<input type="hidden" name="book" value="{{book}}">
+						{% endif %}
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Member</label>
+									{{form.member}}
+									<span class="text-danger">{{form.errors.member}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Issue Date</label>
+									{{form.issue_date}}
+									<span class="text-danger">{{form.errors.issue_date}}</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Return Date</label>
+									{{form.return_date}}
+									<span class="text-danger">{{form.errors.return_date}}</span>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Note</label>
+									{{form.note}}
+									<span class="text-danger">{{form.errors.note}}</span>
+								</div>
+							</div>
+						</div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

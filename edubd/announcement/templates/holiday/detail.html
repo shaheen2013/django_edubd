@@ -1,0 +1,49 @@
+{% extends "author/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h5>Holiday:</h5>
+		
+		
+		<hr>
+		<div class="card card-header">
+		<h1>Holiday Details</h1>
+		</div>
+		<div class="card card-body">
+			<div class="row">
+				<div class="col-md-12"> 
+					<ul class="list-group">
+						<li class="list-group-item "><span class="font-weight-bold">Title : </span><span class="float-right">{{holiday.title}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Start Date : </span><span class="float-right">{{holiday.start_date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">End Date : </span><span class="float-right">{{holiday.end_date|date:'d-m-Y'}}</span></li>
+						<li class="list-group-item "><span class="font-weight-bold">Atachment : </span><span class="float-right">{% if row.attachment %}
+								<a class="badge badge-info" href="/static/images/{{row.attachment}}" target="_blank">Attachment</a>
+
+							{% else %}
+								None
+							{% endif %}</span></li>
+						
+						
+					</ul>
+				</div>
+				
+				
+				<div class="col-md-12" style="padding-top:20px;"> 
+					<ul class="list-group">
+						<li class="list-group-item active">Description</li>
+						<li class="list-group-item ">{{holiday.description}}</li>
+					</ul>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+  
+{% endblock  %}

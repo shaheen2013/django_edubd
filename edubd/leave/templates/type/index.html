@@ -1,0 +1,63 @@
+{% extends "author/base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		
+		<div class="col-md-12">
+			<div class="card card-header bg-info text-white">
+				<h1>Leave Type List</h1>
+			</div>
+		</div>
+		<div class="col-md-7">
+			
+			<div class="card card-header">
+			<h4>Leave Type</h4>
+			</div>
+			<div class="card card-body"> 
+				<table  class="display table table-bordered table-hover table-striped datatable" style="width:100%">
+					<thead>
+					<tr>
+						<th>Serial</th>
+						<th>Type</th>
+						<th>Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for row in types  %}
+						<tr>
+							<td>{{forloop.counter}}</td>
+							<td>{{row.name}}</td>
+							<td><a href="{% url 'leave:edit_type' row.id %}" class="btn btn-info">Edit</a>
+							<a onclick='return confirm("Are you sure you want to do this?")' href="{% url 'leave:delete_type' row.id %}" class="btn btn-danger">Delete</a></td>
+						</tr>
+					{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-5">
+				<div class="card card-header">
+					<h4>Add New Leave Type</h4>
+				</div>
+				<div class="card card-body">
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="exampleInputEmail1">Type</label>
+							{{form.name}}
+							<span class="text-danger">{{form.errors.name}}</span>
+						</div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+		
+
+	</div>
+</div
+  
+{% endblock  %}
